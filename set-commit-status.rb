@@ -5,7 +5,7 @@ token = ENV['OCTOKIT_ACCESS_TOKEN']
 if token.nil? || token.empty? then
   puts "You need to set a personal access token to continue"
   puts "For example:"
-  puts "> export OCTOKIT_ACCESS_TOKEN='<some value here>'"
+  puts "> export OCTOKIT_ACCESS_TOKEN=<some value here>"
   exit
 end
 
@@ -28,7 +28,7 @@ end
 
 puts "Found the repository!\n\n"
 
-puts "Enter the commit SHA you want to update:"
+puts "Enter the commit SHA you want to update (find any old commit SHA):"
 STDOUT.flush
 commit_sha = gets.chomp
 
@@ -57,7 +57,8 @@ end
 
 begin
   info = {
-    :target_url => 'http://github.com'
+    :target_url => 'http://github.com',
+    :context => 'default'
   }
   status = client.create_status(repository, found_commit.sha, status, info)
 rescue
